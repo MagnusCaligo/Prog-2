@@ -24,6 +24,26 @@ public class OrderedListPriorityQueue<E> implements PriorityQueue<E>{
 		
 	}
 	
+	public E remove(E obj){
+		
+		Node<E> previous = null;
+		Node<E> current = head;
+		
+		while(current != null && ((Comparable<E>)obj).compareTo(current.data) < 0){
+			previous = current;
+			current = current.next;
+		}
+		if(current == null)
+			return null;
+		if(previous == null){
+			head = tail = null;
+			return current.data;
+		}
+		previous.next = current.next;
+		return current.data;
+		
+	}
+	
 	@Override
 	public boolean insert(E object) {
 		if(head == null){
@@ -33,14 +53,15 @@ public class OrderedListPriorityQueue<E> implements PriorityQueue<E>{
 		}
 		Node<E> previous = null;
 		Node<E> current = head;
-		while(current != null && ((Comparable<E>)object).compareTo(current.data)>=0){
+		E data = object;
+		while(current != null && ((Comparable<E>)object).compareTo(current.data) <= 0){
 			previous = current;
 			current = current.next;
 		}
 		if(current == null){
-			Node newNode = new Node(object);
+			Node<E> newNode = new Node<E>(object);
 			previous.next  = newNode;
-			tail = newNode;
+			head = tail = newNode;
 			currentSize++;
 			return true;
 		}

@@ -11,6 +11,10 @@ public class OrderedArrayPriorityQueue<E> implements PriorityQueue<E> {
 		maxSize = size;
 		currentSize = 0;
 	}
+	
+	public OrderedArrayPriorityQueue() {
+		this(OrderedListPriorityQueue.DEFAULT_MAX_CAPACITY);
+	}
 
 	@Override
 	public boolean insert(E object) {
@@ -24,7 +28,9 @@ public class OrderedArrayPriorityQueue<E> implements PriorityQueue<E> {
 
 	@Override
 	public E remove() {
-		return storage.removeMin();
+		E obj = storage.removeMin();
+		currentSize--;
+		return obj;
 	}
 
 	@Override

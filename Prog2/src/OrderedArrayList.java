@@ -54,7 +54,7 @@ public class OrderedArrayList<E> implements OrderedListADT<E>{
 	
 	private int binarySearch(E obj, int lo, int hi){
 		if(lo > hi){
-			if(lo < this.currentSize-1 && ((Comparable<E>)obj).compareTo(storage[lo])==0)
+			if(lo < this.currentSize && ((Comparable<E>)obj).compareTo(storage[lo])==0)
 				return lo;
 			return -1;
 		}
